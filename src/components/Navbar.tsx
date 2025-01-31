@@ -1,14 +1,15 @@
-import { GraduationCap, Menu, X } from "lucide-react";
+import { GraduationCap, Menu, X, ChevronDown } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleSignUp = () => {
-    navigate('/signnnup');
+    navigate("/signnnup");
   };
 
   return (
@@ -24,9 +25,7 @@ const Navbar = () => {
               <div className="bg-gradient-to-r from-primary to-secondary p-2 rounded-xl">
                 <GraduationCap className="h-6 w-6 text-white" />
               </div>
-              <span className="ml-2 text-xl font-bold text-gradient">
-                Sahay
-              </span>
+              <span className="ml-2 text-xl font-bold text-gradient">Sahay</span>
             </Link>
           </motion.div>
           
@@ -38,6 +37,35 @@ const Navbar = () => {
             <Link to="/events" className="text-gray-600 hover:text-primary transition-colors">Events</Link>
             <Link to="/community" className="text-gray-600 hover:text-primary transition-colors">Community</Link>
             <Link to="/jobs" className="text-gray-600 hover:text-primary transition-colors">Jobs</Link>
+            
+            <div className="relative">
+              <button 
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+                className="flex items-center text-gray-600 hover:text-primary transition-colors"
+              >
+                Features <ChevronDown className="ml-1 w-5 h-5" />
+              </button>
+              <AnimatePresence>
+                {dropdownOpen && (
+                  <motion.div 
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="absolute left-0 mt-2 w-64 bg-white shadow-lg rounded-xl overflow-hidden z-50"
+                  >
+                    <ul className="py-2">
+                      <li><Link to="/community" className="block px-4 py-2 hover:bg-gray-100">Community Building</Link></li>
+                      <li><Link to="/eventmanagement" className="block px-4 py-2 hover:bg-gray-100">Event Management</Link></li>
+                      <li><Link to="/research" className="block px-4 py-2 hover:bg-gray-100">Research Activities</Link></li>
+                      <li><Link to="/jobmatching" className="block px-4 py-2 hover:bg-gray-100">Internships & Jobs</Link></li>
+                      <li><Link to="/alumniconnect" className="block px-4 py-2 hover:bg-gray-100">Alumni Connect</Link></li>
+                      <li><Link to="/accomodation" className="block px-4 py-2 hover:bg-gray-100">Hostel & Housing</Link></li>
+                    </ul>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+            
             <motion.button 
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
@@ -85,4 +113,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Navbar;
