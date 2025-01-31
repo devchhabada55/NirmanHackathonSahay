@@ -67,7 +67,7 @@ const Accommodation = () => {
       location: 'Campus North',
       distance: '0.5km from university',
       rent: 15000,
-      deposit: 30000,
+      deposit: 45000,
       amenities: ['WiFi', 'Furnished', 'Power Backup'],
       preferredTenants: 'Students',
       available: 'Immediately',
